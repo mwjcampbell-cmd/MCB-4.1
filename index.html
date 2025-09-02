@@ -1,6 +1,38 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCB Firestore PWA</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Firebase CDN Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <h1>MCB Firestore PWA</h1>
+
+  <!-- Login controls -->
+  <div id="auth-controls">
+    <p id="user-info">Not signed in</p>
+    <button id="login-btn" onclick="login()">Sign in with Google</button>
+    <button id="logout-btn" onclick="logout()" style="display:none;">Logout</button>
+  </div>
+
+  <!-- Your app content goes here -->
+  <div id="app-content" style="display:none;">
+    <h2>Welcome to the app!</h2>
+    <p>You can now use Firestore features here.</p>
+  </div>
+
+  <script src="main.js"></script>
+</body>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Matty Campbell Building</title>
