@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Matty Campbell Building</title>
+  <meta name="theme-color" content="#000000" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <h1>Matty Campbell Building</h1>
+    <div id="userArea">
+      <button id="loginBtn" class="btn">Sign in with Google</button>
+      <button id="logoutBtn" class="btn" style="display:none;">Sign out</button>
+      <span id="userName" class="muted"></span>
+    </div>
+  </div>
+
+  <div style="padding:8px;text-align:center;">
+    <button id="syncBtn" class="btn">Sync</button>
+  </div>
+</header>
+
+<main>
+  <!-- Signed-out notice -->
+  <section id="signedOut" class="panel">
+    <h2>Please sign in</h2>
+    <p>To access your data, sign in with a Google account.</p>
+    <div style="text-align:center">
+      <button id="loginBtn2" class="btn primary">Sign in with Google</button>
+    </div>
+  </section>
+
+  <!-- App content (hidden until sign-in) -->
+  <section id="appContent" style="display:none">
+
+    <!-- Top nav: small dropdown for mobile -->
+    <nav class="top-nav">
+      <button id="menuBtn" class="btn">☰ Menu</button>
+      <div id="menuDropdown" class="menu-dropdown" aria-hidden="true">
+        <button onclick="show('home'); toggleMenu(false)">Home</button>
+        <button onclick="show('work'); toggleMenu(false)">Work Log</button>
+        <button onclick="show('sites'); toggleMenu(false)">Job Sites</button>
+        <button onclick="show('tasks'); toggleMenu(false)">Tasks</button>
+        <button onclick="show('materials'); toggleMenu(false)">Materials</button>
+        <button onclick="show('cutting'); toggleMenu(false)">Cutting List</button>
+        <button onclick="show('events'); toggleMenu(false)">Calendar</button>
+        <button onclick="show('reports'); toggleMenu(false)">Reports</button>
+        <button onclick="show('settings'); toggleMenu(false)">Settings</button>
+      </div>
+    </nav>
+
+    <!-- Home -->
+    <section id="home" class="active">
+      <h2>Dashboard</h2>
+      <h3>Upcoming Events</h3>
+      <div id="homeEvents"></div>
+      <h3>Recent Work Logs</h3>
+      <div id="homeLogs"></div>
+      <h3>Pending Materials</h3>
+      <div id="homeMaterials"></div>
+    </section>
+
+    <!-- Work Log -->
+    <section id="work">
+      <h2>Work Log</h2>
+      <div class="panel">
+        <label for="logDate">Date</label>
+        <input type="date" id="logDate" />
+        <label for="logSite">Job Site</label>
+        <select id="logSite"></select>
+        <label>Tasks</label>
+        <select id="logTask"></select>
+        <label for="logHours">Hours</label>
+        <input id="logHours" type="number" step="0.25" />
+        <label for="logNotes">Notes</label>
+        <textarea id="logNotes"></textarea>
+        <div class="row">
+          <button id="addLogBtn" class="btn primary">Add Log</button>
+        </div>
+      </div>
+      <div id="logsList"></div>
+    </section>
+
+    <!-- Job Sites -->
+    <section id="sites">
+      <h2>Job Sites</h2>
+      <div class="panel">
+        <label for="siteName">Name</label>
+        <input id="siteName" />
+        <label for="siteAddress">Address</label>
+        <input id="siteAddress" />
+        <label for="siteContact">Contact</label>
+        <input id="siteContact" />
+        <label for="siteNotes">Notes</label>
+        <textarea id="siteNotes"></textarea>
+        <div class="row">
+          <button id="addSiteBtn" class="btn primary">Add Site</button>
+        </div>
+      </div>
+      <div id="sitesList"></div>
+    </section>
+
+    <!-- Tasks -->
+    <section id="tasks">
+      <h2>Tasks</h2>
+      <div class="panel">
+        <label for="taskName">Task</label>
+        <input id="taskName" />
+        <div class="row">
+          <button id="addTaskBtn" class="btn primary">Add Task</button>
+        </div>
+      </div>
+      <div id="tasksList"></div>
+    </section>
+
+    <!-- Materials -->
+    <section id="materials">
+      <h2>Materials</h2>
+      <div class="panel">
+        <label for="materialName">Material</label>
+        <input id="materialName" />
+        <label for="materialDue">Due Date</label>
+        <input id="materialDue" type="date" />
+        <label for="materialStatus">Status</label>
+        <select id="materialStatus">
+          <option>Pending</option>
+          <option>Confirmed</option>
+        </select>
+        <div class="row">
+          <button id="addMaterialBtn" class="btn primary">Add Material</button>
+        </div>
+      </div>
+      <div id="materialsList"></div>
+    </section>
+
+    <!-- Cutting List -->
+    <section id="cutting">
+      <h2>Cutting List</h2>
+      <div class="panel">
+        <label for="cutItem">Item</label>
+        <input id="cutItem" />
+        <div class="row">
+          <button id="addCutBtn" class="btn primary">Add</button>
+        </div>
+      </div>
+      <div id="cuttingList"></div>
+    </section>
+
+    <!-- Events -->
+    <section id="events">
+      <h2>Calendar / Events</h2>
+      <div class="panel">
+        <label for="eventTitle">Title</label>
+        <input id="eventTitle" />
+        <label for="eventDate">Date</label>
+        <input id="eventDate" type="date" />
+        <div class="row">
+          <button id="addEventBtn" class="btn primary">Add Event</button>
+        </div>
+      </div>
+      <div id="eventsList"></div>
+    </section>
+
+    <!-- Reports -->
+    <section id="reports">
+      <h2>Reports</h2>
+      <div class="panel">
+        <label for="reportSite">Site (optional)</label>
+        <select id="reportSite"></select>
+        <div class="row">
+          <button id="generateReportBtn" class="btn primary">Generate Report</button>
+        </div>
+      </div>
+      <div id="reportOutput"></div>
+    </section>
+
+    <!-- Settings -->
+    <section id="settings">
+      <h2>Settings</h2>
+      <div class="panel">
+        <button id="clearAllBtn" class="btn">Clear Local Cache</button>
+      </div>
+    </section>
+
+  </section> <!-- end appContent -->
+</main>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
